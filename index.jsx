@@ -56,3 +56,43 @@ const tweetsData = [
         uuid: '8hy671sff-c0f5-4545-9c4b-1237gyys45',
     },     
 ]
+
+
+const feedEl = document.getElementById('feed')
+
+function renderFeed() {
+    let feedHtml = ''
+
+    tweetsData.forEach(tweet => {
+        feedHtml += `
+        <div class="tweet">
+            <div class="tweet-inner">
+                <img src="${tweet.profilePic}" class="profile-pic">
+                <div>
+                    <p class="handle">${tweet.handle}</p>
+                    <p class="tweet-text">${tweet.tweetText}</p>
+                    <div class="tweet-details">
+                        <div class="tweet-detail">
+                            <i class="fa-regular fa-comment"></i>
+                            <span>${tweet.replies.length}</span>
+                        </div>
+                        <div class="tweet-detail">
+                            <i class="fa-regular fa-heart"></i>
+                            <span>${tweet.likes}</span>
+                        </div>
+                        <div class="tweet-detail">
+                            <i class="fa-solid fa-retweet"></i>
+                            <span>${tweet.retweets}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+    })
+
+    feedEl.innerHTML = feedHtml
+}
+
+renderFeed()
+
