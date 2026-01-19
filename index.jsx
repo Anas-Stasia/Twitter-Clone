@@ -99,8 +99,6 @@ renderFeed()
 
 
 
-
-
 document.addEventListener('click', function (e) {
     if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like)
@@ -108,7 +106,11 @@ document.addEventListener('click', function (e) {
     else if (e.target.dataset.retweet) {
         handleRetweetClick(e.target.dataset.retweet)
     }
+    else if (e.target.dataset.reply) {
+        handleReplyClick(e.target.dataset.reply)
+    }
 })
+
 
 
 
