@@ -96,3 +96,11 @@ function renderFeed() {
 
 renderFeed()
 
+
+
+document.addEventListener('click', function (e) {
+    if (e.target.dataset.like) {
+        handleLikeClick(e.target.dataset.like)
+    }
+})
+
