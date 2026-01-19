@@ -98,9 +98,29 @@ renderFeed()
 
 
 
+
+
+
 document.addEventListener('click', function (e) {
     if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like)
+    } 
+    else if (e.target.dataset.retweet) {
+        handleRetweetClick(e.target.dataset.retweet)
     }
 })
 
+
+
+function handleLikeClick(tweetId) {
+    const targetTweet = tweetsData.find(tweet => tweet.uuid === tweetId)
+
+    if (targetTweet.isLiked) {
+        targetTweet.likes--
+    } else {
+        targetTweet.likes++
+    }
+
+    targetTweet.isLiked = !targetTweet.isLiked
+    renderFeed()
+}
