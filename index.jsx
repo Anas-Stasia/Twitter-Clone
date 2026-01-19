@@ -124,3 +124,18 @@ function handleLikeClick(tweetId) {
     targetTweet.isLiked = !targetTweet.isLiked
     renderFeed()
 }
+
+
+function handleRetweetClick(tweetId) {
+    const targetTweet = tweetsData.find(tweet => tweet.uuid === tweetId)
+
+    if (targetTweet.isRetweeted) {
+        targetTweet.retweets--
+    } else {
+        targetTweet.retweets++
+    }
+
+    targetTweet.isRetweeted = !targetTweet.isRetweeted
+    renderFeed()
+}
+
