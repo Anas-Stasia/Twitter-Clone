@@ -141,3 +141,26 @@ function handleRetweetClick(tweetId) {
     renderFeed()
 }
 
+
+const tweetInput = document.getElementById('tweet-input')
+const tweetBtn = document.getElementById('tweet-btn')
+
+tweetBtn.addEventListener('click', function () {
+    if (tweetInput.value.trim()) {
+        tweetsData.unshift({
+            handle: `@You`,
+            profilePic: `images/scrimbalogo.png`,
+            likes: 0,
+            retweets: 0,
+            tweetText: tweetInput.value,
+            replies: [],
+            isLiked: false,
+            isRetweeted: false,
+            uuid: crypto.randomUUID()
+        })
+
+        renderFeed()
+        tweetInput.value = ''
+    }
+})
+
