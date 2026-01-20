@@ -1,168 +1,194 @@
-const tweetsData = [   
+/* ================================
+   DATA
+================================ */
+
+const tweetsData = [
     {
-        handle: `@TrollBot66756542 💎`,
-        profilePic: `images/troll.jpg`,
+        handle: '@TrollBot66756542 💎',
+        profilePic: 'images/troll.jpg',
         likes: 27,
         retweets: 10,
-        tweetText: `Buy Bitcoin, ETH Make 💰💰💰 low low prices. 
-            Guaranteed return on investment. HMU DMs open!!`,
+        tweetText: `Buy Bitcoin, ETH Make 💰💰💰 low low prices.
+Guaranteed return on investment. HMU DMs open!!`,
         replies: [],
         isLiked: false,
         isRetweeted: false,
         uuid: '4b161eee-c0f5-4545-9c4b-8562944223ee',
-    },    
+    },
     {
-        handle: `@Elon ✅`,
-        profilePic: `images/musk.png`,
+        handle: '@Elon ✅',
+        profilePic: 'images/musk.png',
         likes: 6500,
         retweets: 234,
-        tweetText: `I need volunteers for a one-way mission to Mars 🪐. No experience necessary🚀`,
+        tweetText: 'I need volunteers for a one-way mission to Mars 🪐. No experience necessary🚀',
         replies: [
-                  {
-                handle: `@TomCruise ✅`,
-                profilePic: `images/tcruise.png`,
-                tweetText: `Yes! Sign me up! 😎🛩`,
+            {
+                handle: '@TomCruise ✅',
+                profilePic: 'images/tcruise.png',
+                tweetText: 'Yes! Sign me up! 😎🛩',
             },
-                  {
-                handle: `@ChuckNorris ✅`,
-                profilePic: `images/chucknorris.jpeg`,
-                tweetText: `I went last year😴`,
+            {
+                handle: '@ChuckNorris ✅',
+                profilePic: 'images/chucknorris.jpeg',
+                tweetText: 'I went last year😴',
             },
         ],
         isLiked: false,
         isRetweeted: false,
         uuid: '3c23454ee-c0f5-9g9g-9c4b-77835tgs2',
     },
-        {
-        handle: `@NoobCoder12`,
-        profilePic: `images/flower.png`,
+    {
+        handle: '@NoobCoder12',
+        profilePic: 'images/flower.png',
         likes: 10,
         retweets: 3,
-        tweetText: `Are you a coder if you only know HTML?`,
+        tweetText: 'Are you a coder if you only know HTML?',
         replies: [
             {
-                handle: `@StackOverflower ☣️`,
-                profilePic: `images/overflow.png`,
-                tweetText: `No. Onviosuly not. Go get a job in McDonald's.`,
+                handle: '@StackOverflower ☣️',
+                profilePic: 'images/overflow.png',
+                tweetText: "No. Obviously not. Go get a job in McDonald's.",
             },
             {
-                handle: `@YummyCoder64`,
-                profilePic: `images/love.png`,
-                tweetText: `You are wonderful just as you are! ❤️`,
+                handle: '@YummyCoder64',
+                profilePic: 'images/love.png',
+                tweetText: 'You are wonderful just as you are! ❤️',
             },
         ],
         isLiked: false,
         isRetweeted: false,
         uuid: '8hy671sff-c0f5-4545-9c4b-1237gyys45',
-    },     
+    },
 ]
 
+/* ================================
+   DOM ELEMENTS
+================================ */
 
 const feedEl = document.getElementById('feed')
+const tweetInput = document.getElementById('tweet-input')
+const tweetBtn = document.getElementById('tweet-btn')
+
+/* ================================
+   EVENT LISTENERS
+================================ */
+
+document.addEventListener('click', function (e) {
+    if (e.target.dataset.like) {
+        handleLikeClick(e.target.dataset.like)
+    } else if (e.target.dataset.retweet) {
+        handleRetweetClick(e.target.dataset.retweet)
+    } else if (e.target.dataset.reply) {
+        handleReplyClick(e.target.dataset.reply)
+    }
+})
+
+tweetBtn.addEventListener('click', handleTweetSubmit)
+
+/* ================================
+   HANDLERS
+================================ */
+
+function handleLikeClick(tweetId) {
+    const tweet = tweetsData.find(t => t.uuid === tweetId)
+    tweet.likes += tweet.isLiked ? -1 : 1
+    tweet.isLiked = !tweet.isLiked
+    renderFeed()
+}
+
+function handleRetweetClick(tweetId) {
+    const tweet = tweetsData.find(t => t.uuid === tweetId)
+    tweet.retweets += tweet.isRetweeted ? -1 : 1
+    tweet.isRetweeted = !tweet.isRetweeted
+    renderFeed()
+}
+
+function handleReplyClick(tweetId) {
+    const tweet = tweetsData.find(t => t.uuid === tweetId)
+    tweet.isRepliesVisible = !tweet.isRepliesVisible
+    renderFeed()
+}
+
+function handleTweetSubmit() {
+    if (!tweetInput.value.trim()) return
+
+    tweetsData.unshift({
+        handle: '@You',
+        profilePic: 'images/scrimbalogo.png',
+        likes: 0,
+        retweets: 0,
+        tweetText: tweetInput.value,
+        replies: [],
+        isLiked: false,
+        isRetweeted: false,
+        uuid: crypto.randomUUID(),
+    })
+
+    tweetInput.value = ''
+    renderFeed()
+}
+
+/* ================================
+   RENDER
+================================ */
 
 function renderFeed() {
-    let feedHtml = ''
+    feedEl.innerHTML = tweetsData.map(tweet => {
+        const likeClass = tweet.isLiked ? 'liked' : ''
+        const retweetClass = tweet.isRetweeted ? 'retweeted' : ''
 
-    tweetsData.forEach(tweet => {
-        feedHtml += `
+        const repliesHtml = tweet.isRepliesVisible
+            ? tweet.replies.map(reply => `
+                <div class="tweet-reply">
+                    <div class="tweet-inner">
+                        <img src="${reply.profilePic}" class="profile-pic">
+                        <div>
+                            <p class="handle">${reply.handle}</p>
+                            <p class="tweet-text">${reply.tweetText}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('')
+            : ''
+
+        return `
         <div class="tweet">
             <div class="tweet-inner">
                 <img src="${tweet.profilePic}" class="profile-pic">
                 <div>
                     <p class="handle">${tweet.handle}</p>
                     <p class="tweet-text">${tweet.tweetText}</p>
+
                     <div class="tweet-details">
                         <div class="tweet-detail">
-                            <i class="fa-regular fa-comment"></i>
+                            <i class="fa-regular fa-comment"
+                               data-reply="${tweet.uuid}"></i>
                             <span>${tweet.replies.length}</span>
                         </div>
+
                         <div class="tweet-detail">
-                            <i class="fa-regular fa-heart"></i>
+                            <i class="fa-regular fa-heart ${likeClass}"
+                               data-like="${tweet.uuid}"></i>
                             <span>${tweet.likes}</span>
                         </div>
+
                         <div class="tweet-detail">
-                            <i class="fa-solid fa-retweet"></i>
+                            <i class="fa-solid fa-retweet ${retweetClass}"
+                               data-retweet="${tweet.uuid}"></i>
                             <span>${tweet.retweets}</span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            ${repliesHtml}
         </div>
         `
-    })
-
-    feedEl.innerHTML = feedHtml
+    }).join('')
 }
+
+/* ================================
+   INIT
+================================ */
 
 renderFeed()
-
-
-
-
-document.addEventListener('click', function (e) {
-    if (e.target.dataset.like) {
-        handleLikeClick(e.target.dataset.like)
-    } 
-    else if (e.target.dataset.retweet) {
-        handleRetweetClick(e.target.dataset.retweet)
-    }
-    else if (e.target.dataset.reply) {
-        handleReplyClick(e.target.dataset.reply)
-    }
-})
-
-
-
-
-function handleLikeClick(tweetId) {
-    const targetTweet = tweetsData.find(tweet => tweet.uuid === tweetId)
-
-    if (targetTweet.isLiked) {
-        targetTweet.likes--
-    } else {
-        targetTweet.likes++
-    }
-
-    targetTweet.isLiked = !targetTweet.isLiked
-    renderFeed()
-}
-
-
-function handleRetweetClick(tweetId) {
-    const targetTweet = tweetsData.find(tweet => tweet.uuid === tweetId)
-
-    if (targetTweet.isRetweeted) {
-        targetTweet.retweets--
-    } else {
-        targetTweet.retweets++
-    }
-
-    targetTweet.isRetweeted = !targetTweet.isRetweeted
-    renderFeed()
-}
-
-
-const tweetInput = document.getElementById('tweet-input')
-const tweetBtn = document.getElementById('tweet-btn')
-
-tweetBtn.addEventListener('click', function () {
-    if (tweetInput.value.trim()) {
-        tweetsData.unshift({
-            handle: `@You`,
-            profilePic: `images/scrimbalogo.png`,
-            likes: 0,
-            retweets: 0,
-            tweetText: tweetInput.value,
-            replies: [],
-            isLiked: false,
-            isRetweeted: false,
-            uuid: crypto.randomUUID()
-        })
-
-        renderFeed()
-        tweetInput.value = ''
-    }
-})
-
-
-
