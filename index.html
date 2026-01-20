@@ -1,40 +1,44 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<!-- CSS -->
-	<link rel="stylesheet" href="index.css">
-	<!-- Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Twitter Clone</title>
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-	<div class="tweet-detail">
-    <i class="fa-regular fa-comment"
-       data-reply="${tweet.uuid}">
-    </i>
-    <span>${tweet.replies.length}</span>
-</div>
+    <header>
+        <h1>Twitter</h1>
+    </header>
 
-	<header>
-		<h1>Twitter</h1>
-	</header>
-	<main>
-		<div class="tweet-input-area">
-    <img src="images/scrimbalogo.png" class="profile-pic">
-    <textarea id="tweet-input" placeholder="What's happening?"></textarea>
-</div>
+    <main>
+        <!-- Tweet Input -->
+        <div class="tweet-input-area">
+            <img src="images/scrimbalogo.png" class="profile-pic">
+            <textarea 
+                id="tweet-input" 
+                placeholder="What's happening?"
+            ></textarea>
+        </div>
 
-		<button id="tweet-btn">Tweet</button>
-		<div class="feed" id="feed"></div>
-	</main>
-	<script src="index.js"></script>
+        <button id="tweet-btn">Tweet</button>
+
+        <!-- Feed -->
+        <div class="feed" id="feed"></div>
+    </main>
+
+    <!-- JS -->
+    <script src="index.js"></script>
 </body>
-
 </html>
-
-
