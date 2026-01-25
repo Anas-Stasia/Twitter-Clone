@@ -1,155 +1,98 @@
-/* ================================
-   RESET & BASE
-================================ */
-
-html, body {
+/* Reset some defaults */
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-/* ================================
-   TYPOGRAPHY & ICONS
-================================ */
-
-h1 {
-    color: #0F8CDF;
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-i {
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.liked {
-    color: red;
-}
-
-.retweeted {
-    color: limegreen;
-}
-
-/* ================================
-   LAYOUT
-================================ */
-
-header,
-main {
-    width: 290px;
-    margin: 0 auto;
-}
-
-header {
-    padding-bottom: 25px;
-}
-
-.tweet-input-area {
+body {
+    background-color: #e6ecf0;
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    justify-content: center;
+    padding: 20px;
 }
 
-/* ================================
-   FORM ELEMENTS
-================================ */
+.container {
+    width: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
-textarea {
+header h1 {
+    color: #1DA1F2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tweet-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#tweet-input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccd6dd;
+    resize: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+#tweet-btn {
+    background-color: #1DA1F2;
+    color: white;
     border: none;
     padding: 10px;
-    margin-bottom: 20px;
-    height: 60px;
-    width: 100%;
-    font-size: 20px;
-    line-height: 30px;
-    resize: none;
-}
-
-button {
-    background-color: #1DA1F2;
-    border: none;
-    color: white;
-    padding: 10px 19px;
-    border-radius: 20px;
-    width: 100%;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.3s;
 }
 
-/* ================================
-   TWEET
-================================ */
-
-.tweet {
-    border-top: 1px solid lightgray;
-    padding-top: 20px;
-    width: 100%;
-    margin: 15px 0;
+#tweet-btn:hover {
+    background-color: #0d95e8;
 }
 
-.tweet-inner {
+.feed {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
     gap: 10px;
 }
 
-.tweet-text {
-    width: 207px;
-    font-size: 14px;
-    line-height: 20px;
+.tweet {
+    background-color: #f5f8fa;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
 }
 
-.handle {
-    font-size: 12px;
-    font-weight: 500;
-    color: #555;
-    margin-top: 0;
+.tweet p {
+    margin-bottom: 10px;
 }
 
-/* ================================
-   TWEET DETAILS (ICONS)
-================================ */
-
-.tweet-details {
-    display: flex;
-    justify-content: space-between;
-    width: 160px;
-    font-size: 13px;
+.tweet button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: bold;
 }
 
-.tweet-detail {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+.like-btn {
+    color: #657786;
 }
 
-/* ================================
-   REPLIES
-================================ */
-
-.tweet-reply {
-    border-top: 1px solid lightgray;
-    padding-top: 20px;
-    margin: 10px 0 10px 40px;
-    width: 80%;
+.like-btn.liked {
+    color: #e0245e;
 }
 
-/* ================================
-   IMAGES
-================================ */
-
-.profile-pic {
-    border: 1px solid lightgray;
-    border-radius: 50%;
-    width: 48px;
-}
-
-/* ================================
-   UTILITIES
-================================ */
-
-.hidden {
-    display: none;
+.delete-btn {
+    color: #e0245e;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
