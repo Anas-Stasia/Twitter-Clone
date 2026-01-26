@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #e6ecf0;
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 500px;
+    background: #fff;
+    min-height: 100vh;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+header {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tweet-box {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tweet-box img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.tweet-input {
+    flex: 1;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 16px;
+    outline: none;
+}
+
+.tweet-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#charCount {
+    font-size: 12px;
+    color: #657786;
+}
+
+button {
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0d8ddb;
+}
+
+/* Tweet */
+.tweet {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tweet img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.tweet-content {
+    flex: 1;
+}
+
+.tweet-header {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.tweet-header span {
+    color: #657786;
+    font-size: 13px;
+}
+
+.tweet-text {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.tweet-footer {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #657786;
+}
+
+.tweet-footer span {
+    cursor: pointer;
+}
+
+.liked {
+    color: #e0245e;
+}
+
+.retweeted {
+    color: #17bf63;
+}
+
+.delete {
+    margin-left: auto;
+    color: red;
+    cursor: pointer;
+}
